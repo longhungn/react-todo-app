@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TodoItem from './todoItem';
+import AddItem from './addItem';
+
+import './css/index.css';
 
 class TodoComponent extends React.Component {
     constructor(props) {
@@ -9,6 +13,7 @@ class TodoComponent extends React.Component {
         }
         
         this.deleteItem = this.deleteItem.bind(this);
+        this.addItem = this.addItem.bind(this);
     }
     
     render() {
@@ -23,8 +28,15 @@ class TodoComponent extends React.Component {
                 <ul>
                     {todos}
                 </ul>
+                <AddItem onAdd={this.addItem}/>
             </div>
         );
+    }
+    
+    addItem(item) {
+        var newTodos = this.state.todos;
+        newTodos.push(item);
+        this.setState({todos: newTodos});
     }
     
     deleteItem(item) {
@@ -36,27 +48,6 @@ class TodoComponent extends React.Component {
     }
 }
 
-class TodoItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleDelete = this.handleDelete.bind(this);
-    }
-    
-    render() {
-        return (
-            <li>
-                <div className="todo-item">
-                    <span onClick={this.handleDelete}>x </span>
-                    <span className="item-name">{this.props.item}</span>
-                </div>
-            </li>
-        );
-    }
-    
-    handleDelete() {
-        console.log(this.props);
-        this.props.onDelete(this.props.item);
-    }
-}
+
 
 ReactDOM.render(<TodoComponent  />, document.getElementById("todo-wrapper") );

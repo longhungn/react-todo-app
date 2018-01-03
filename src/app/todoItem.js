@@ -24,11 +24,15 @@ export default class TodoItem extends React.Component {
     }
     
     scratch() {
-        this.setState({decoration: "strikethrough"});
+        if (this.state.decoration === "") {
+            this.setState({decoration: "strikethrough"});
+        } else {
+            this.setState({decoration: ""});
+        }
     }
     
     handleDelete() {
         // console.log(this.props);
-        this.props.onDelete(this.props.item);
+        this.props.onDelete(this.props.dataKey);
     }
 }

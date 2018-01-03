@@ -21,5 +21,6 @@ export default class AddItem extends React.Component {
     handleAdd(event) {
         event.preventDefault();
         this.props.onAdd(this.refs.newItem.value); 
+        this.refs.newItem.value = "";
     }
 }
